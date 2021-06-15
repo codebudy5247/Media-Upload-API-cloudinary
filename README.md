@@ -1,4 +1,4 @@
-> Image,Audio,Video Upload API using multer and cloudinary.
+# Image,Audio,Video Upload API using multer and cloudinary.
 
 ## JSON returned {Image}
 ```JSON
