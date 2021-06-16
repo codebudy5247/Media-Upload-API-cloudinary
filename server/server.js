@@ -288,7 +288,7 @@ app.get("/posts",async(req,res)=>{
     try {
         const posts = await Posts.find()
         console.log(posts)
-        res.status(200).json(posts);
+        res.status(200).json({posts:posts});
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
