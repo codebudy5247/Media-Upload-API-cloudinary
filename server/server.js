@@ -7,6 +7,7 @@ const cors = require("cors");
 const fs = require('fs')
 const multer = require('multer')
 const cloudinary = require('cloudinary').v2
+const Posts = require("./PostModel.js")
 
 const connectDB = require("./DB");
 
@@ -32,7 +33,6 @@ app.get("/", (req, res) => {
     res.send("API is running....");
 });
 
-//Routes
 //Image Upload Route
 app.post("/image", (req, res) => {
     // Get the file name and extension with multer
@@ -267,7 +267,32 @@ app.post("/video", async (req, res) => {
     });
 });
 
+//Create a Post
+app.post("/posts",async(req,res)=>{
+       try {
+           const post = req.body
 
+           const newPost = new Posts({
+               ...post,
+           })
+           const data = await newPost.save()
+           console.log(data)
+           res.status(201).json(data)
+       } catch (error) {
+           res.status(400).json({ message: error.message });
+       }
+})
+
+//Get All Posts
+app.get("/posts",async(req,res)=>{
+    try {
+        const posts = await Posts.find()
+        console.log(posts)
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+})
 
 const PORT = process.env.PORT || 5000;
 
