@@ -26,8 +26,12 @@ app.use(express.json({
 app.use(express.urlencoded({
     extended: true
 }));
-app.use(cors());
+//app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
 
+app.use(cors(corsOptions));
 //Test Route
 app.get("/", (req, res) => {
     res.send("API is running....");
